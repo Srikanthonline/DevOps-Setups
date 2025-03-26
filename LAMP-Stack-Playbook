@@ -1,0 +1,45 @@
+- hosts: all
+  become: yes  # Run tasks as sudo
+  tasks:
+
+    - name: Installing Apache (httpd)
+      yum:
+        name: httpd
+        state: present
+
+    - name: Starting and enabling Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Installing MySQL Server
+      yum:
+        name: mysql-server
+        state: present
+
+    - name: Starting and enabling MySQL service
+      service:
+        name: mysqld
+        state: started
+        enabled: yes
+
+    - name: Installing PHP and necessary modules
+      yum:
+        name:
+          - php
+          - php-mysql
+          - php-cli
+          - php-gd
+          - php-xml
+        state: present
+
+    - name: Restarting Apache to apply PHP changes
+      service:
+        name: httpd
+        state: restarted
+
+    - name: Installing Python3
+      yum:
+        name: python3
+        state: present
