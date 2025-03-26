@@ -1,0 +1,11 @@
+- hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Print System Information
+      debug:
+        msg: |
+          System Name: {{ansible_system}}
+          Node Name: {{ansible_nodename}}
+          OS Family: {{ansible_os_family}}
+          Total Memory: {{ansible_memtotal_mb}}
+          Free Memory: {{ansible_memfree_mb}}
